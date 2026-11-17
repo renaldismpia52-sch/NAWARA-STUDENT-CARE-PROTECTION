@@ -30,3 +30,13 @@ Thumbs.db
 *.before-*
 *.backup
 a.out
+
+# Temporary backup files
+*.save
+*.bak
+*-backup.blade.php
+*backup-*.blade.php
+*.backup-*
+M-B
+M-B.save
+web-backup-*.php
