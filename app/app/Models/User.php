@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
-#[Fillable(['name', 'email', 'password', 'nis', 'verification_status', 'verified_by', 'verified_at', 'cohort_year'])]
+#[Fillable(['name', 'gender', 'email', 'password', 'nis', 'verification_status', 'verified_by', 'verified_at', 'cohort_year'])]
 #[Hidden(['password', 'remember_token'])]
 class User extends Authenticatable
 {
@@ -44,6 +44,16 @@ class User extends Authenticatable
         return $this->hasRole('admin');
     }
 
+    public function isKepsek(): bool
+    {
+        return $this->hasRole('kepsek');
+    }
+
+    public function isTimAntiBullying(): bool
+    {
+        return $this->hasRole('tim_anti_bullying');
+    }
+
     public function studentClassHistories(): HasMany
     {
         return $this->hasMany(StudentClassHistory::class);
@@ -58,4 +68,10 @@ class User extends Authenticatable
     {
         return $this->hasMany(StudentImportBatch::class);
     }
+
+    public function personnelAssignments(): HasMany
+    {
+        return $this->hasMany(PersonnelAssignment::class);
+    }
+
 }

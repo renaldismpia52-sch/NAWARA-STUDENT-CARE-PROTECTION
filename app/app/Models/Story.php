@@ -9,6 +9,7 @@ class Story extends Model
 {
     protected $fillable = [
         'user_id',
+        'counselor_id',
         'is_anonymous',
         'title',
         'content',
@@ -25,7 +26,12 @@ class Story extends Model
         ];
     }
 
-    public function user(): BelongsTo
+    public function counselor(): BelongsTo
+{
+    return $this->belongsTo(User::class, 'counselor_id');
+}
+
+public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
     }

@@ -77,7 +77,7 @@ Route::middleware(['auth', 'verified', 'role:guru_bk'])->prefix('guru-bk')->name
 
 // Dashboard Admin
 Route::get('/admin/dashboard', function () {
-    return view('dashboard');
+    return view('admin.dashboard');
 })->middleware(['auth', 'verified', 'role:admin'])
     ->name('admin.dashboard');
 
@@ -132,6 +132,11 @@ Route::middleware(['auth', 'verified', 'role:admin'])
             \App\Http\Controllers\Admin\SchoolSettingController::class,
             'update'
         ])->name('settings.update');
+
+    // Manajemen Personel Admin
+    Route::get('/personel', [\App\Http\Controllers\Admin\PersonnelController::class, 'index'])->name('personnel.index');
+    Route::get('/personel/tambah', [\App\Http\Controllers\Admin\PersonnelController::class, 'create'])->name('personnel.create');
+    Route::post('/personel', [\App\Http\Controllers\Admin\PersonnelController::class, 'store'])->name('personnel.store');
     });
 
 // Ruang Cerita untuk Guru BK

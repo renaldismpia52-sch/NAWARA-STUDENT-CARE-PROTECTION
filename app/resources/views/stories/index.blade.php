@@ -93,7 +93,17 @@
 
 <form method="POST" action="{{ route('murid.stories.store') }}">
             @csrf
-            <label for="title">Judul cerita (boleh dikosongkan)</label>
+            <label for="counselor_id">Pilih Guru BK tujuan cerita</label>
+<select id="counselor_id" name="counselor_id" required>
+    <option value="">-- Pilih Guru BK --</option>
+    @foreach($counselors as $counselor)
+        <option value="{{ $counselor->id }}" {{ old('counselor_id') == $counselor->id ? 'selected' : '' }}>
+            {{ $counselor->gender === 'female' ? 'Ibu Guru BK' : 'Bapak Guru BK' }} — {{ $counselor->name }}
+        </option>
+    @endforeach
+</select>
+
+<label for="title">Judul cerita (boleh dikosongkan)</label>
             <input id="title" name="title" maxlength="150" value="{{ old('title') }}" placeholder="Contoh: Aku ingin bercerita">
 
             <label for="content">Isi ceritamu</label>

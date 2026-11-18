@@ -9,7 +9,7 @@ class GuruBKStoryController extends Controller
 {
     public function index()
     {
-        $stories = Story::with('user')->latest()->get();
+        $stories = Story::with('user')->where('counselor_id', auth()->id())->latest()->get();
 
         return view('guru-bk.stories.index', compact('stories'));
     }
@@ -20,7 +20,7 @@ class GuruBKStoryController extends Controller
             'counselor_reply' => 'required|string|max:5000',
         ]);
 
-        $story = Story::findOrFail($id);
+        $story = Story::where('counselor_id', auth()->id())->findOrFail($id);
 
         $story->update([
             'counselor_reply' => $validated['counselor_reply'],
